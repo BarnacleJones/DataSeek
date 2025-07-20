@@ -1,4 +1,4 @@
-namespace DataSeek.Models;
+namespace DataSeek.Web.Models;
 
 public class ErrorViewModel
 {

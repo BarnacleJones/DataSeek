@@ -1,4 +1,4 @@
-using DataSeek.DataAccess;
+using DataSeek.Web;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataSeekDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .AddUserSecrets<Program>(); // required for secret manager
+//to create secret on local machine:
+//dotnet user-secrets init
+//dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=DataSeekDb;Username=yeahB0;Password=nahB0"
+
 
 var app = builder.Build();
 

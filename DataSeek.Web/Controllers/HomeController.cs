@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using DataSeek.Models;
+using DataSeek.Web.Models;
 
-namespace DataSeek.Controllers;
+namespace DataSeek.Web.Controllers;
 
 public class HomeController : Controller
 {

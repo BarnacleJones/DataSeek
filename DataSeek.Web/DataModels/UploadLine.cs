@@ -1,4 +1,4 @@
-namespace DataSeek.Data.Models;
+namespace DataSeek.Web.DataModels;
 
 public class UploadLine
 {
@@ -8,5 +8,6 @@ public class UploadLine
     public string? IpAddress { get; set; }
     public string? FileName { get; set; }
     public int UploadFileId  { get; set; }
+    public UploadFile? UploadFile { get; set; }
     
 }
