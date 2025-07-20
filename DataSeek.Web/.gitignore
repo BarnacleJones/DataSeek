@@ -43,6 +43,8 @@ ScaffoldingReadMe.txt
 ~$*
 *~
 CodeCoverage/
+appsettings.*.json
+*.user
 
 # MSBuild Binary and Structured Log
 *.binlog
