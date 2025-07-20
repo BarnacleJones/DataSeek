@@ -1,4 +1,7 @@
 using DataSeek.Web;
+using DataSeek.Web.DataModels;
+using DataSeek.Web.Service;
+using DataSeek.Web.Service.Contract;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,23 @@ builder.Configuration
 //to create secret on local machine:
 //dotnet user-secrets init
 //dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=DataSeekDb;Username=yeahB0;Password=nahB0"
+
+//location of log file - logingest defined in appsettings
+
+//eg
+// "LogIngest": {
+//     "LogDirectory": "/home/user/Documents/logs",
+//     "UploadPattern": "uploads_*.log",
+//     "DownloadPattern": "downloads_*.log"
+// }
+
+builder.Services.Configure<LogIngestOptions>(
+    builder.Configuration.GetSection("LogIngest"));
+builder.Services.AddHostedService<LogIngestService>();
+
+//custom services
+builder.Services.AddScoped<IUploadService, UploadService>();
+builder.Services.AddScoped<ISettingsService, SettingsService>();
 
 
 var app = builder.Build();
@@ -36,5 +56,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();
